@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// schema.prism
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// モデル定義のディレクティブで指定したバリデーションをNestJSのValidationPipeをつかってバリデーションするための設定です。
+generator nestgraphql {
+   provider = "node node_modules/prisma-nestjs-graphql"
+   output = "../src/@generated/prisma-nestjs-graphql"
+   fields_Validator_from = "class-validator"
+   fields_Validator_input = true
+   decorate_1_type        = "CreateOne*Args"
+   decorate_1_field       = data
+   decorate_1_name        = ValidateNested
+   decorate_1_from        = "class-validator"
+   decorate_1_arguments   = "[]"
+   decorate_2_type        = "CreateOne*Args"
+   decorate_2_field       = data
+   decorate_2_from        = "class-transformer"
+   decorate_2_arguments   = "['() => {propertyType.0}']"
+   decorate_2_name        = Type
+ }
+
+// 3つのスラッシュ）からはじまるコメントでディレクティブを記述することでprisma-nestjs-graphqlによって生成されるObject TypeやInput Typeにディレクティブを追加できます。
+// passwordは@HideField()で出力不可、createdAtとupdatedAtは入出力不可にしています。 
+ model User {
+  /// @Field(() => ID)
+  id          Int       @id @default(autoincrement())
+  /// @Validator.@IsEmail()
+  email       String    @unique
+  /// @Validator.IsNotEmpty()
+  name        String
+  /// @HideField()
+  /// @Validator.MinLength(8)
+  password    String
+  /// @HideField({ input: true, output: true })
+  hashedRefreshToken String?
+  /// @HideField({ input: true, output: true })
+  createdAt DateTime @default(now())
+  /// @HideField({ input: true, output: true })
+  updatedAt DateTime @updatedAt
+}

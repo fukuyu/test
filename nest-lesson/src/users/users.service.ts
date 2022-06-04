@@ -4,7 +4,10 @@ import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model'
 import { FindFirstUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-first-user.args';
 import { CreateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/create-one-user.args';
 import { FindUniqueUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-unique-user.args';
- import { UpdateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/update-one-user.args';
+import { UpdateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/update-one-user.args';
+import { DeleteOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/delete-one-user.args';
+import { FindAllUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-all-user.args';
+import { FindManyUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-many-user.args';
 
 @Injectable()
 export class UsersService {
@@ -25,4 +28,16 @@ export class UsersService {
     async update(args: UpdateOneUserArgs): Promise<User> {
         return this.prisma.user.update(args)
     }
+
+    async delete(args: DeleteOneUserArgs): Promise<User> {
+        return this.prisma.user.delete(args)
+    }
+
+    async findMany(args: FindManyUserArgs): Promise<User[]> {
+        return this.prisma.user.findMany(args)
+    }
+
+    // async FindAll(args: FindAllUserArgs): Promise<User> {
+    //     return this.prisma.user.FindAll(args)
+    // }
 }

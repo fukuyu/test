@@ -110,6 +110,8 @@ enum UserScalarFieldEnum {
 type Mutation {
   createUser(data: UserCreateInput!): User!
   update(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  findMany(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+  delete(where: UserWhereUniqueInput!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   refreshToken: LoginResponse!
   logout: Boolean!

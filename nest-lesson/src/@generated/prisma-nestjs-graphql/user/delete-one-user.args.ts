@@ -9,4 +9,5 @@ export class DeleteOneUserArgs {
     @Field(() => UserWhereUniqueInput, {nullable:false})
     @Type(() => UserWhereUniqueInput)
     where!: UserWhereUniqueInput;
+    //data!: UserWhereUniqueInput;
 }

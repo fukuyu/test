@@ -8,6 +8,9 @@ import { FindFirstUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/fin
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { UpdateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/update-one-user.args';
+import { DeleteOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/delete-one-user.args';
+import { FindAllUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-all-user.args';
+import { FindManyUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-many-user.args';
 @Resolver(() => User)
 export class UsersResolver {
     constructor(private readonly userService: UsersService) {}
@@ -33,5 +36,26 @@ export class UsersResolver {
         @Args() args: UpdateOneUserArgs
     ) {
         return this.userService.update(args);
+    }
+
+    // @Mutation(() => User)
+    // async FindAll(
+    //     @Args() args: FindAllUserArgs
+    // ) {
+    //     return this.userService.FindAll(args);
+    // }
+
+    @Mutation(() => [User])
+    async findMany(
+        @Args() args: FindManyUserArgs
+    ) {
+        return this.userService.findMany(args);
+    }
+
+    @Mutation(() => User)
+    async delete(
+        @Args() args: DeleteOneUserArgs
+    ) {
+        return this.userService.delete(args);
     }
 }

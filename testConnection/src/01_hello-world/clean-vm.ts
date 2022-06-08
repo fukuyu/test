@@ -1,3 +1,4 @@
+import 'dotenv/config'
 const {
     ClientSecretCredential,
     DefaultAzureCredential,
@@ -8,16 +9,16 @@ const {
   // Azure authentication in environment variables for DefaultAzureCredential
   let credentials: null = null;
   
- const tenantId =
-    process.env["AZURE_TENANT_ID"] || "8d41d6d7-36ce-4e0c-8c6d-cf2c54c39039";
-  const clientId =
-    process.env["AZURE_CLIENT_ID"] || "60aedd7b-df23-4439-bc90-78737a3dfd8d";
-  const secret =
-    process.env["AZURE_CLIENT_SECRET"] || ".P38Q~djEg_ipKF8ZZEHaKXTlA-tWg8cbshPAb95";
-  const subscriptionId =
-    process.env["AZURE_SUBSCRIPTION_ID"] || "6388a8b1-d3ca-4872-b220-2f0e21e65586";
+  const tenantId =
+  process.env["AZURE_TENANT_ID"] || process.env.AZURE_TENANT_ID;
+const clientId =
+  process.env["AZURE_CLIENT_ID"] || process.env.AZURE_CLIENT_ID;
+const secret =
+  process.env["AZURE_CLIENT_SECRET"] || process.env.AZURE_CLIENT_SECRET;
+const subscriptionId =
+  process.env["AZURE_SUBSCRIPTION_ID"] || process.env.AZURE_SUBSCRIPTION_ID;
   
-   const resourceGroupName = "HAL-OH22-RG-IHIW4C-GroupA";
+   const resourceGroupName = process.env.RESOURCE_GROUP;
    const vmResourceName = "testConnection";
   
   if (process.env.production) {

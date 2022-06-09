@@ -136,10 +136,10 @@ import { Identity } from "@azure/arm-resources";
       },
       storageProfile: {
         imageReference: {
-          sku: "2016-Datacenter",
-          publisher: "MicrosoftWindowsServer",
-          version: "latest",
-          offer: "WindowsServer",
+          sku: "wordpress-lemp-centos",
+          publisher: "vmlabinc1613642184700",
+          version: "5.9.0",
+          offer: "wordpress",
         },
         osDisk: {
           caching: "ReadWrite",
@@ -167,7 +167,7 @@ import { Identity } from "@azure/arm-resources";
         computerName: "myVM",
         adminPassword: "Aa!1()-xyz",
         windowsConfiguration: {
-          enableAutomaticUpdates: true, // need automatic update for reimage
+          enableAutomaticUpdates: false, // need automatic update for reimage
         },
       },
       networkProfile: {

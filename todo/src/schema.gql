@@ -1,0 +1,175 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+
+  """@Validator.@IsNotEmpty()"""
+  title: String!
+  date: DateTime!
+  done: Boolean!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  user(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User!
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: IntFilter
+  title: StringFilter
+  date: DateTimeFilter
+  done: BoolFilter
+  password: StringFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input UserOrderByWithRelationInput {
+  id: SortOrder
+  title: SortOrder
+  date: SortOrder
+  done: SortOrder
+  password: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input UserWhereUniqueInput {
+  id: Int
+  title: String
+}
+
+enum UserScalarFieldEnum {
+  id
+  title
+  date
+  done
+  password
+  createdAt
+  updatedAt
+}
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  delete(where: UserWhereUniqueInput!): User!
+  update(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  findMany(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+}
+
+input UserCreateInput {
+  title: String!
+  date: DateTime
+  done: Boolean
+  password: String!
+}
+
+input UserUpdateInput {
+  title: StringFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
+  done: BoolFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}

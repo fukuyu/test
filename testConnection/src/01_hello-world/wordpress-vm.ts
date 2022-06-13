@@ -38,7 +38,8 @@ import { Identity } from "@azure/arm-resources";
   const extension_publisher_name = process.env.EXTENSION_PUBLISHER_NAME || "";
   const extension_image_type = process.env.EXTENSION_IMAGE_TYPE || "";
   const extension_image_version = process.env.EXTENSION_IMAGE_VERSION || "";
-  let client: ComputeManagementClient;
+  var client: ComputeManagementClient;
+  //let network_client: NetworkManagementClient;
   //let network_client: NetworkManagementClient;
   
   //--VirtualMachinesExamples--
@@ -61,6 +62,7 @@ import { Identity } from "@azure/arm-resources";
       },
     };
     console.log("2");
+
      const network_client = new NetworkManagementClient(
         credentials,
         subscriptionId
@@ -166,9 +168,9 @@ import { Identity } from "@azure/arm-resources";
         adminUsername: "testuser",
         computerName: "myVM",
         adminPassword: "Aa!1()-xyz",
-        windowsConfiguration: {
-          enableAutomaticUpdates: false, // need automatic update for reimage
-        },
+        // windowsConfiguration: {
+        //   enableAutomaticUpdates: true, // need automatic update for reimage
+        // },
       },
       networkProfile: {
         networkInterfaces: [
@@ -185,7 +187,26 @@ import { Identity } from "@azure/arm-resources";
           },
         ],
       },
+      plan: {
+        name: "wordpress-lemp-centos",
+        publisher: "vmlabinc1613642184700",
+        product: "wordpress"
+      }
     };
+    console.log(4)
+
+    if (process.env.production) {
+      // production
+      credentials = new DefaultAzureCredential();
+    } else {
+      // development
+      credentials = new ClientSecretCredential(tenantId, clientId, secret);
+      console.log("development2");
+    }
+      client = new ComputeManagementClient(
+      credentials,
+      subscriptionId
+  );
     await client.virtualMachines
       .beginCreateOrUpdateAndWait(
         resourceGroupName,
@@ -195,6 +216,7 @@ import { Identity } from "@azure/arm-resources";
       .then((response) => {
         console.log(response);
       });
+    console.log(5)
   }
   
   //virtualMachines.instanceView
